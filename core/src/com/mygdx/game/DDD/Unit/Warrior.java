@@ -8,8 +8,12 @@ public abstract class Warrior extends BaseUnit{
         super(name, attack, defence,maxHealth, supply, gangSize, health,speed,damage, x,y, type);
         this.bumbum=bumbum;
     }
-    
-    
+
+    @Override
+    public String getTYPE() {
+        return super.getTYPE();
+    }
+
     @Override
     public void step(ArrayList<BaseUnit> team, ArrayList<BaseUnit> friends) {
         if (bumbum>0 && this.health>0)

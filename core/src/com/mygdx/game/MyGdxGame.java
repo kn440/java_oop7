@@ -28,6 +28,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	public static ArrayList<BaseUnit> allUnit;
 
 	private static int step = 0;
+	private static float dx, dy;
 
 	@Override
 	public void create () {
@@ -42,35 +43,53 @@ public class MyGdxGame extends ApplicationAdapter {
 		music.setVolume(.125f);
 		music.play();
 		init();
-
+		int my = 0;
 		crossBowMan = new Texture(String.valueOf("units/CrossBowMan.png"));
+		my = crossBowMan.getHeight();
 		farmer = new Texture(String.valueOf("units/Farmer.png"));
+		if (my < farmer.getHeight()) my = farmer.getHeight();
 		monk = new Texture(String.valueOf("units/Monk.png"));
+		if (my < monk.getHeight()) my = monk.getHeight();
 		robber = new Texture(String.valueOf("units/Robber.png"));
+		if (my < robber.getHeight()) my = robber.getHeight();
 		sniper = new Texture(String.valueOf("units/Sniper.png"));
+		if (my < sniper.getHeight()) my = sniper.getHeight();
 		spearMan = new Texture(String.valueOf("units/SpearMan.png"));
+		if (my < spearMan.getHeight()) my = spearMan.getHeight();
 		wizard = new Texture(String.valueOf("units/Wizard.png"));
+		if (my < wizard.getHeight()) my = wizard.getHeight();
+		dx = dy = Gdx.graphics.getHeight() / 10;
 
 	}
 
 	@Override
-	public void render () {
+	public void render ()
+	{
 		if (step == 0) {
 			Gdx.graphics.setTitle("Ход " + step);
 		} else Gdx.graphics.setTitle("Ход " + step);
 		batch.begin();
-		int npcIndex = 0;
-
-		for (int i = 1; i <= MyGdxGame.GANG_SIZE; i++) {
-			for (int j = 1; j <= MyGdxGame.GANG_SIZE; j++) {
-				//System.out.print(getChar(new Position(j, i)));
+		batch.draw(fon, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		whiteSide.forEach(n -> {
+			switch (n.getTYPE()){
+				case "Robber": batch.draw(robber, n.getPosition().getX()*dx, (n.getPosition().getY()-1)*dy); break;
+				case "Farmer":batch.draw(farmer, n.getPosition().getX()*dx, (n.getPosition().getY()-1)*dy); break;
+				case "Sniper":batch.draw(sniper,n.getPosition().getX()*dx, (n.getPosition().getY()-1)*dy); break;
+				case "Monk":batch.draw(monk, n.getPosition().getX()*dx, (n.getPosition().getY()-1)*dy); break;
 			}
+		});
 
-			npcIndex++;
-		}
+		darkSide.forEach(n -> {
+			switch (n.getTYPE()) {
+				case "Wizard":batch.draw(wizard, n.getPosition().getX()*dx, (n.getPosition().getY()-1)*dy); break;
+				case "Farmer":batch.draw(farmer,n.getPosition().getX()*dx, (n.getPosition().getY()-1)*dy); break;
+				case "Spearman":batch.draw(spearMan, n.getPosition().getX()*dx, (n.getPosition().getY()-1)*dy); break;
+				case "Crossbowman":batch.draw(crossBowMan, n.getPosition().getX()*dx, (n.getPosition().getY()-1)*dy); break;
+			}
+		});
 
 
-		batch.draw(fon, 0, 0);
+
 		batch.end();
 		if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
 			step++;

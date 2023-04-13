@@ -1,8 +1,6 @@
 package com.mygdx.game;
 
 
-import com.mygdx.game.DDD.Unit.Position;
-
 import java.util.Collections;
 
 public class ConsoleView {
@@ -31,22 +29,22 @@ public class ConsoleView {
 
         for (int i = 1; i <= MyGdxGame.GANG_SIZE - 1; i++) {
             for (int j = 1; j <= MyGdxGame.GANG_SIZE; j++) {
-                System.out.print(getChar(new Position(j, i)));
+               // System.out.print(getChar(new Position(j, i)));
             }
             System.out.print("|");
-            System.out.println(PrintInfo(npcIndex));
+          //  System.out.println(PrintInfo(npcIndex));
             System.out.println(ConsoleView.mid10);
             npcIndex++;
         }
 
         for (int j = 1; j <= MyGdxGame.GANG_SIZE; j++) {
-            System.out.print(getChar(new Position(j, MyGdxGame.GANG_SIZE)));
+          //  System.out.print(getChar(new Position(j, MyGdxGame.GANG_SIZE)));
         }
         System.out.print("|");
-        System.out.println(PrintInfo(npcIndex));
+       // System.out.println(PrintInfo(npcIndex));
         System.out.println(ConsoleView.bottom10);
     }
-    private static String getChar(Position position){
+   /* private static String getChar(Position position){
 
         String str = "| ";
         boolean alive = false;
@@ -81,7 +79,7 @@ public class ConsoleView {
         else str +="     " + AnsiColors.ANSI_BLUE+ MyGdxGame.darkSide.get(npcIndex).getInfo()+AnsiColors.ANSI_RESET;
 
         return str;
-    }
+    }*/
     private static String formatDiv(String str){
         return str.replace('a', '\u250c')
                 .replace('b', '\u252c')

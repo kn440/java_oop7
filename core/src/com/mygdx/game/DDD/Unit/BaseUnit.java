@@ -11,7 +11,7 @@ public abstract class BaseUnit implements UnitInterface {
     protected int speed;	
     protected int[] damage;
     protected Position position;
-    public String type;
+    protected final String TYPE;
     
 
     
@@ -20,16 +20,18 @@ public abstract class BaseUnit implements UnitInterface {
     {
         
         this.name=name;
+
         this.attack= attack;
         this.defence=defence; 
-        this.maxHealth=maxHealth; 
+        this.maxHealth=maxHealth;
+        TYPE = type;
         this.supply=0; 
         this.gangSize=gangSize;
         this.health=health;	 
         this.speed=speed;	
         this.damage=damage;
         this.position=new Position(x,y);
-        this.type=this.getClass().getName().split("\\.")[1];
+        // this.type=this.getClass().getName().split("\\.")[1];
 
     }
 
@@ -40,17 +42,17 @@ public abstract class BaseUnit implements UnitInterface {
         
     }
 
-    @Override
+    /*@Override
     public String getInfo()
     {
         String outStr=String.format("\t %-3s\t %-3d\t %-3d\t %-3d%%\t %-3d\t      ", type,attack,defence,(int)health*100/maxHealth,(damage[0]+damage[1])/2);
         return outStr;
-    }
+    }*/
     
     @Override
     public String toString() {
         
-        return "Name: "+name+", Type: "+getInfo()+", Attack: "+attack+", Defence: "
+        return "Name: "+name+", Type: "+/*getInfo()+*/", Attack: "+attack+", Defence: "
         +defence+", Damage: "+Arrays.toString(damage)+", Health: "
         +health+", Speed: "+speed;
     }
@@ -61,10 +63,15 @@ public abstract class BaseUnit implements UnitInterface {
     return this.position;
    }
 
-@Override
+    @Override
+    public String getTYPE() {
+        return TYPE;
+    }
+
+  /*  @Override
 public String getName() {
     return this.getClass().getName().split("\\.")[1];
-}
+}*/
    @Override
    public void getDamage(int attack) {
             if (this.health - attack > 0) {

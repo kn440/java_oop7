@@ -10,12 +10,6 @@ public class Crossbowman extends Scooter {
         
     }
 
- 
-    
-  
-    
 
-
-    
 
 }
